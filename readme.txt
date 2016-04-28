@@ -1,10 +1,11 @@
 Build using VS2015 Community - ASP.Net 4.6.1
 TODOs
-* Introduce DI into the MovieController
+* Introduce DI into the MovieController, remove static member
 * API_KEY needs externalisation could be better
 * Improve logging, use log4net
-* clean up rest of HomeController web site
+* clean up rest website portion of app or slim down
 * clean warnings.
+* InMemoryRepository - replace list, with faster associative struct. Strengthen store method against dupes.
 * Move to ASP.Net Core!
 
 sample postman data
