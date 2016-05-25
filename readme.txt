@@ -1,6 +1,5 @@
 Build using VS2015 Community - ASP.Net 4.6.1
 TODOs
-* Introduce DI into the MovieController, remove static member
 * API_KEY needs externalisation could be better
 * Improve logging, use log4net
 * clean up rest website portion of app or slim down

@@ -14,12 +14,13 @@ namespace XGMovies.Controllers
     [RoutePrefix("api/movies")]
     public class MoviesController : ApiController
     {
-        static IMovieRepository _repostiory;
+        IMovieRepository _repostiory;
 
-        static MoviesController()
+      
+
+        public MoviesController(IMovieRepository movieRepository)
         {
-            // TODO - Use dependency inject and singleton in future
-            _repostiory = new InMemoryRepository(new TheMovieDbOrgService(), seed:false);
+            _repostiory = movieRepository;
         }
 
         // GET api/movies
