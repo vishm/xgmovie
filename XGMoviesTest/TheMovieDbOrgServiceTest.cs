@@ -4,6 +4,7 @@ using System.Linq;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using XGMoviesBackEnd.ExternalServices;
+using System.Configuration;
 
 namespace XGMoviesTest
 {
@@ -64,7 +65,7 @@ namespace XGMoviesTest
         public void GetMovieIdAsync_WhereValidMovieProvided()
         {
             // Arrange
-            var service = new TheMovieDbOrgService();
+            var service = CreateMovieDbOrgService();            
 
             // Act
             var expectedId = 19995;
@@ -81,7 +82,7 @@ namespace XGMoviesTest
         public void GetMovieIdAsync_WhereValidMovieWithSpacesProvided()
         {
             // Arrange
-            var service = new TheMovieDbOrgService();
+            var service = CreateMovieDbOrgService();
 
             // Act
             var expectedId = 278927;
@@ -98,7 +99,7 @@ namespace XGMoviesTest
         public void GetMovieIdAsync_WhereInvalidSearch()
         {
             // Arrange
-            var service = new TheMovieDbOrgService();
+            var service = CreateMovieDbOrgService();
 
             // Act
             ArgumentException failure = null;
@@ -115,6 +116,12 @@ namespace XGMoviesTest
 
             // Assert
             Assert.IsNotNull(failure, "Exception expected");            
+        }
+
+        private static TheMovieDbOrgService CreateMovieDbOrgService()
+        {
+            var apiKey = ConfigurationManager.AppSettings["TheMovieDbOrgApiKey"];
+            return new TheMovieDbOrgService(apiKey);
         }
     }
 }

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Web.Http.Results;
 using XGMoviesBackEnd.Repository;
 using XGMoviesBackEnd.ExternalServices;
+using System.Configuration;
 
 namespace XGMoviesTest
 {
@@ -197,7 +198,8 @@ namespace XGMoviesTest
 
         private static MoviesController CreeatTestMoviesController()
         {
-            var m = new InMemoryRepository(new TheMovieDbOrgService(), seed: false);
+            var apiKey = ConfigurationManager.AppSettings["TheMovieDbOrgApiKey"];
+            var m = new InMemoryRepository(new TheMovieDbOrgService(apiKey), seed: false);
             var controller = new MoviesController(m);
 
             return controller;

@@ -6,6 +6,8 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using System.Configuration;
+using System.Diagnostics;
 
 namespace XGMoviesBackEnd.ExternalServices
 {
@@ -15,12 +17,16 @@ namespace XGMoviesBackEnd.ExternalServices
     /// </summary>
     public class TheMovieDbOrgService : IMovieIDResolutionService
     {
-        String _apiKey;
+        private string _apiKey;
 
-        public TheMovieDbOrgService()
-        {
-            var key = File.ReadLines("d:\\TheMovieDbOrgKey.txt").First();
-            _apiKey = key;
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="apiKey">Key as supplied through registration with https://www.themoviedb.org</param>
+        public TheMovieDbOrgService(string apiKey)
+        {                        
+            Debug.Assert(!String.IsNullOrWhiteSpace(apiKey), "API key missing/not found");
+            _apiKey = apiKey;
         }
 
         public async Task<int> GetMovieIdAsync(string title, ushort year)
@@ -28,7 +34,8 @@ namespace XGMoviesBackEnd.ExternalServices
             int retValue = 0;
             using (var client = CreateTheMovieDbOrgClient())
             {
-                var encodedTitle = HttpUtility.UrlEncode(title);
+                // ensure spaces etc are encoded correctly
+                var encodedTitle = HttpUtility.UrlEncode(title); 
                 var requestUrl = String.Format($"https://api.themoviedb.org/3/search/movie?query={encodedTitle}&year={year}&api_key={_apiKey}");
 
                 // ConfigureAwait() need for libraries used in an ASP.Net context to ensure proper

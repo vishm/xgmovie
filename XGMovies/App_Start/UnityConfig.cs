@@ -4,6 +4,7 @@ using Unity.WebApi;
 using System;
 using XGMoviesBackEnd.ExternalServices;
 using XGMoviesBackEnd.Repository;
+using System.Configuration;
 
 namespace XGMovies
 {
@@ -12,12 +13,7 @@ namespace XGMovies
         public static void RegisterComponents()
         {
 			var container = new UnityContainer();
-
-            // register all your components with the container here
-            // it is NOT necessary to register your controllers
-
-            // e.g. container.RegisterType<ITestService, TestService>();
-
+            
             RegisterType(container);
             
             GlobalConfiguration.Configuration.DependencyResolver = new Unity.WebApi.UnityDependencyResolver(container);
@@ -25,8 +21,16 @@ namespace XGMovies
 
         private static void RegisterType(UnityContainer container)
         {
-            container.RegisterType<IMovieIDResolutionService, TheMovieDbOrgService>(new ContainerControlledLifetimeManager());
+            // Initialize our TheMovieDbOrg service for use later
+            var stuff = ConfigurationManager.AppSettings["webpages:Version"];
+            var apiKey = ConfigurationManager.AppSettings["TheMovieDbOrgApiKey"];
+            container.RegisterType<IMovieIDResolutionService, TheMovieDbOrgService>(
+                                new ContainerControlledLifetimeManager(),
+                                new InjectionConstructor(apiKey));
+
+            // Pair up our movie repository with movie resolution service.
             var inMemoryRepo = new InMemoryRepository(container.Resolve<IMovieIDResolutionService>(), seed: true);
+
             container.RegisterInstance<IMovieRepository>(inMemoryRepo);
         }
     }
