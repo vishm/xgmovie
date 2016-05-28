@@ -15,7 +15,6 @@ Capture various notes for myself in developing these style of apps, including:
 * Cloud hosting (todo)
 * Web page that renders information stored (todo)
 
-
 ##Build
 
 nuget restore
@@ -25,6 +24,17 @@ msbuild /p:Confiration=debug /t:rebuild .\XGMovies.sln
 mstest /testcontainer:.\XGMoviesTest\bin\Debug\XGMoviesTest.dll
 
 ##Runtime
+
+Note that the ASP.NET and tests require the existance of "D:\XGMoviesSecrets.config" appsetting in which the api key for themoviedb.org is placed as follows:
+
+```xml
+<appSettings>
+	<add key="TheMovieDbOrgApiKey" value="xxxxxxx" />
+</appSettings>
+
+```
+
+Reference to D:\XGMoviesSecrets.config can be found in "XGMovies\Web.config" and "XGMoviesTest\app.config".
 
  
 
