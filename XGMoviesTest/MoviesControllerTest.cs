@@ -118,7 +118,7 @@ namespace XGMoviesTest
             var controller = CreeatTestMoviesController();
 
             // Act            
-            var movie = new Movie() { Title = "Jungle Book", Year = 1967 };
+            var movie = new NewMovie() { Title = "Jungle Book", Year = 1967 };
             var response = controller.Post(movie) as CreatedAtRouteNegotiatedContentResult<Movie>;
 
             // Assert
@@ -136,8 +136,8 @@ namespace XGMoviesTest
             // Act      
             var movies = new[]
             {
-                new Movie() { Title = "Jungle Book", Year = 1967 },
-                new Movie() { Title = "Deadpool ", Year = 2016 }
+                new NewMovie() { Title = "Jungle Book", Year = 1967 },
+                new NewMovie() { Title = "Deadpool ", Year = 2016 }
             };    
             
             controller.Post(movies[0]);
@@ -160,8 +160,8 @@ namespace XGMoviesTest
             // Act      
             var movies = new[]
             {
-                new Movie() { Title = "Jungle Book", Year = 1967 },
-                new Movie() { Title = "Deadpool ", Year = 2016 }
+                new NewMovie() { Title = "Jungle Book", Year = 1967 },
+                new NewMovie() { Title = "Deadpool ", Year = 2016 }
             };
 
             controller.Post(movies[0]);
@@ -182,8 +182,8 @@ namespace XGMoviesTest
             // Act      
             var movies = new[]
             {
-                new Movie() { Title = "Jungle Book", Year = 1967 },
-                new Movie() { Title = "Deadpool ", Year = 2016 }
+                new NewMovie() { Title = "Jungle Book", Year = 1967 },
+                new NewMovie() { Title = "Deadpool ", Year = 2016 }
             };
 
             controller.Post(movies[0]);

@@ -36,5 +36,21 @@ Note that the ASP.NET and tests require the existance of "D:\XGMoviesSecrets.con
 
 Reference to D:\XGMoviesSecrets.config can be found in "XGMovies\Web.config" and "XGMoviesTest\app.config".
 
+##Sample Http POST Body
+
+```json
+{
+	"Title": "Avatar",
+	"Year" : 2009
+}
+```
+
+
+```json
+{
+	"Title": "The Jungle Book",
+	"Year" : 1967
+}
+```
  
 

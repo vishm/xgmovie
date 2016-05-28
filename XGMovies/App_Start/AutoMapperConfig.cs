@@ -17,6 +17,9 @@ namespace XGMovies
         private static void InitializeMapper(IMapperConfiguration cfg)
         {
             // Define two mapping, .reversemap() not working as expected/or not understood by me.
+            cfg.CreateMap<Models.NewMovie, XGMoviesBackEnd.Domain.Movie>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore())
+                .ForMember(dest => dest.MovieDbId, opt => opt.Ignore());
 
             // Map Movie.Id <-> Movie.ObjectId
             cfg.CreateMap<Models.Movie, XGMoviesBackEnd.Domain.Movie>()

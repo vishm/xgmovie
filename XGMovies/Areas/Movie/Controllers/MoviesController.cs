@@ -48,7 +48,7 @@ namespace XGMovies.Controllers
 
         // POST api/movies
         [HttpPost]
-        public IHttpActionResult Post([FromBody]Models.Movie movie)
+        public IHttpActionResult Post([FromBody]Models.NewMovie movie)
         {
             const int YEAR_OF_FIRST_MOVIE = 1896;
 
@@ -62,14 +62,14 @@ namespace XGMovies.Controllers
             try
             {
                 // Return back response with Url to new content, 
-                var domainModel = Mapper.Map<Models.Movie, XGMoviesBackEnd.Domain.Movie>(movie);
+                var domainModel = Mapper.Map<Models.NewMovie, XGMoviesBackEnd.Domain.Movie>(movie);
                 var id = _repostiory.Store(domainModel);
 
-                movie = Mapper.Map<XGMoviesBackEnd.Domain.Movie, Models.Movie>(domainModel);
+                var newMovieObj = Mapper.Map<XGMoviesBackEnd.Domain.Movie, Models.Movie>(domainModel);
 
                 // Use CreatedAtRoute specifying a RouteName "GetById" to form Url, otherwise we
                 // end up with api/movies/Get/1 <- not "Get" is not relevant to path
-                return CreatedAtRoute<Models.Movie>("GetById", new {  id = movie.ObjectId}, movie);
+                return CreatedAtRoute<Models.Movie>("GetById", new {  id = newMovieObj.ObjectId}, newMovieObj);
             }
             catch (Exception e)
             {
