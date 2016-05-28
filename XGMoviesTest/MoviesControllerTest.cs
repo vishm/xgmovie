@@ -4,13 +4,12 @@ using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using XGMovies.Controllers;
 using System.Net.Http;
-using XGMoviesBackEnd.Models;
 using Newtonsoft.Json;
 using System.Linq;
 using System.Web.Http.Results;
-using XGMoviesBackEnd.Repository;
-using XGMoviesBackEnd.ExternalServices;
+using XGMovies.Models;
 using System.Configuration;
+
 
 namespace XGMoviesTest
 {
@@ -125,7 +124,7 @@ namespace XGMoviesTest
             // Assert
             Assert.IsNotNull(response, "Unexpected response");
             Assert.IsTrue(response.RouteName == "GetById", "RouteName not as expectd.");        
-            Assert.IsTrue(response.Content.Id == (int)response.RouteValues["id"], "mismatch between route value");
+            Assert.IsTrue(response.Content.ObjectId== (int)response.RouteValues["id"], "mismatch between route value");
         }
 
         [TestMethod]
@@ -148,7 +147,7 @@ namespace XGMoviesTest
             // Assert
             Assert.IsNotNull(response, "Unexpected response");
             Assert.IsTrue(response.RouteName == "GetById", "RouteName not as expectd.");
-            Assert.IsTrue(response.Content.Id == (int)response.RouteValues["id"], "mismatch between route value");
+            Assert.IsTrue(response.Content.ObjectId== (int)response.RouteValues["id"], "mismatch between route value");
             Assert.AreEqual(movies.Length, getAll.Content.Count(), "Incorrect number of movies retrieved");
         }
 
@@ -167,11 +166,11 @@ namespace XGMoviesTest
 
             controller.Post(movies[0]);
             var createdItem = controller.Post(movies[1]) as CreatedAtRouteNegotiatedContentResult<Movie>;
-            var getById = controller.Get(createdItem.Content.Id) as OkNegotiatedContentResult<Movie>;
+            var getById = controller.Get(createdItem.Content.ObjectId) as OkNegotiatedContentResult<Movie>;
 
             // Assert
             Assert.IsNotNull(getById, "Unexpected response");
-            Assert.IsTrue(getById.Content.Id == (int)createdItem.RouteValues["id"], "mismatch between route value");
+            Assert.IsTrue(getById.Content.ObjectId == (int)createdItem.RouteValues["id"], "mismatch between route value");
         }
 
         [TestMethod]
@@ -199,7 +198,8 @@ namespace XGMoviesTest
         private static MoviesController CreeatTestMoviesController()
         {
             var apiKey = ConfigurationManager.AppSettings["TheMovieDbOrgApiKey"];
-            var m = new InMemoryRepository(new TheMovieDbOrgService(apiKey), seed: false);
+            var m = new XGMoviesBackEnd.Repository.InMemoryRepository(new XGMoviesBackEnd.ExternalServices.TheMovieDbOrgService(apiKey), seed: false);
+            XGMovies.AutoMapperConfig.Configure();
             var controller = new MoviesController(m);
 
             return controller;

@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using XGMoviesBackEnd.Repository;
-using XGMoviesBackEnd.Models;
-using XGMoviesBackEnd.ExternalServices;
 using System.Diagnostics;
+using AutoMapper;
+using System.Collections.Generic;
 
 namespace XGMovies.Controllers
 {
@@ -25,7 +22,13 @@ namespace XGMovies.Controllers
 
         // GET api/movies
         [HttpGet]
-        public IHttpActionResult Get() => Ok(_repostiory.GetAllMovies().AsEnumerable());
+        public IHttpActionResult Get()
+        {
+            var allMovies = _repostiory.GetAllMovies().AsEnumerable();
+            var retData = Mapper.Map<IEnumerable<XGMoviesBackEnd.Domain.Movie>, IEnumerable<Models.Movie>>(allMovies);
+            
+            return Ok(retData);
+        }
 
         // GET api/movies/5        
         [HttpGet, Route("{id:int}", Name ="GetById")]
@@ -36,7 +39,8 @@ namespace XGMovies.Controllers
             var value = _repostiory.GetMovie(id);            
             if ( value != null)
             {
-                retValue = Ok(value);
+                var data = Mapper.Map<XGMoviesBackEnd.Domain.Movie, Models.Movie>(value);
+                retValue = Ok(data);
             }
 
             return retValue ?? NotFound() ;
@@ -44,7 +48,7 @@ namespace XGMovies.Controllers
 
         // POST api/movies
         [HttpPost]
-        public IHttpActionResult Post([FromBody]Movie movie)
+        public IHttpActionResult Post([FromBody]Models.Movie movie)
         {
             const int YEAR_OF_FIRST_MOVIE = 1896;
 
@@ -58,11 +62,14 @@ namespace XGMovies.Controllers
             try
             {
                 // Return back response with Url to new content, 
-                var id = _repostiory.Store(movie);
-                
+                var domainModel = Mapper.Map<Models.Movie, XGMoviesBackEnd.Domain.Movie>(movie);
+                var id = _repostiory.Store(domainModel);
+
+                movie = Mapper.Map<XGMoviesBackEnd.Domain.Movie, Models.Movie>(domainModel);
+
                 // Use CreatedAtRoute specifying a RouteName "GetById" to form Url, otherwise we
                 // end up with api/movies/Get/1 <- not "Get" is not relevant to path
-                return CreatedAtRoute<Movie>("GetById", new {  id = movie.Id }, movie);
+                return CreatedAtRoute<Models.Movie>("GetById", new {  id = movie.ObjectId}, movie);
             }
             catch (Exception e)
             {

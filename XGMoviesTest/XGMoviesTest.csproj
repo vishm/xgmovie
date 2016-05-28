@@ -70,6 +70,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Model\Movie.cs" />
     <Compile Include="MoviesControllerTest.cs" />
     <Compile Include="MovieRepositoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

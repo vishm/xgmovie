@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using XGMoviesBackEnd.ExternalServices;
-using XGMoviesBackEnd.Models;
+using XGMoviesBackEnd.Domain;
 
 namespace XGMoviesBackEnd.Repository
 {
@@ -12,7 +12,7 @@ namespace XGMoviesBackEnd.Repository
     {
         IMovieIDResolutionService _idResolution;
         int _movieUniqueCount = 0;
-        List<Models.Movie> _movies = new List<Movie>();
+        List<Movie> _movies = new List<Movie>();
 
         public InMemoryRepository(IMovieIDResolutionService idResolutionService, bool seed = true)
         {

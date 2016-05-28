@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XGMoviesBackEnd.Models
+namespace XGMoviesBackEnd.Domain
 {
     /// <summary>
     /// Data access object used to communicate from front to back end

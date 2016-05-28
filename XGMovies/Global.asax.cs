@@ -14,7 +14,7 @@ namespace XGMovies
         protected void Application_Start()
         {
             UnityConfig.RegisterComponents();
-
+            AutoMapperConfig.Configure();
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

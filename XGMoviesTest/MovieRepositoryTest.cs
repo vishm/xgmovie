@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using XGMoviesBackEnd.Repository;
 using System.Collections.Generic;
-using XGMoviesBackEnd.Models;
+using XGMoviesBackEnd.Domain;
 using Rhino.Mocks;
 using XGMoviesBackEnd.ExternalServices;
 using System.Threading.Tasks;
