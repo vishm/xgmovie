@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,9 +14,11 @@ namespace XGMoviesBackEnd.Domain
     /// </summary>
     public class Movie
     {
-        public int Id { get; set; }
+        [Key]
+        public int Id { get; set; } 
         public String Title { get; set; }
         public ushort Year { get; set; }
-        public int MovieDbId { get; set; }
+        public int TheMovideDbOrgId { get; set; }  // MovieId from themoviedb.org
+        public virtual ICollection<MovieCharacter> Characters { get; set; } // Note use of ICollection of lazy loading        
     }
 }

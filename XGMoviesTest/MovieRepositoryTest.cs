@@ -26,7 +26,7 @@ namespace XGMoviesTest
 
             // Act            
             var initialCount = repository.GetAllMovies().Count;
-            repository.Store(new Movie() { Id = 0, Title = "Movie1", Year = 1900, MovieDbId = 0 });
+            repository.Store(new Movie() { Id = 0, Title = "Movie1", Year = 1900, TheMovideDbOrgId = 0 });
             var postStoreCount = repository.GetAllMovies().Count;
             
             
@@ -48,11 +48,11 @@ namespace XGMoviesTest
             var repository = new InMemoryRepository(idResolutionStub, seed: false);
 
             // Act            
-            repository.Store(new Movie() { Id = 0, Title = "Movie1", Year = 1900, MovieDbId = 0 });
+            repository.Store(new Movie() { Id = 0, Title = "Movie1", Year = 1900, TheMovideDbOrgId = 0 });
             var peristedMovie = repository.GetAllMovies().First();
 
             // Assert
-            Assert.AreEqual(externalMovieId, peristedMovie.MovieDbId, "Single item expected");
+            Assert.AreEqual(externalMovieId, peristedMovie.TheMovideDbOrgId, "Single item expected");
         }
 
         [TestMethod]
@@ -68,7 +68,7 @@ namespace XGMoviesTest
 
             // Act            
             var initialCount = repository.GetAllMovies().Count;
-            repository.Store(new Movie() { Id = 0, Title = "Movie1", Year = 1900, MovieDbId = 0 });
+            repository.Store(new Movie() { Id = 0, Title = "Movie1", Year = 1900, TheMovideDbOrgId = 0 });
             var movie = repository.GetAllMovies().First();
             repository.Store(movie);
             var postStoreCount = repository.GetAllMovies().Count();
@@ -91,8 +91,8 @@ namespace XGMoviesTest
             // Act
             List<Movie> listOfMovies = new List<Movie>
             {
-                new Movie() { Id = 0, Title = "Movie1", Year = 1900, MovieDbId = 0 },
-                new Movie() { Id = 0, Title = "Movie2", Year = 1901, MovieDbId = 0 },
+                new Movie() { Id = 0, Title = "Movie1", Year = 1900, TheMovideDbOrgId = 0 },
+                new Movie() { Id = 0, Title = "Movie2", Year = 1901, TheMovideDbOrgId = 0 },
             };
 
             listOfMovies.ForEach(movie => repository.Store(movie));
@@ -115,9 +115,9 @@ namespace XGMoviesTest
             // Act
             List<Movie> listOfMovies = new List<Movie>
             {
-                new Movie() { Id = 0, Title = "Movie1", Year = 1900, MovieDbId = 0 },
-                new Movie() { Id = 0, Title = "Movie2", Year = 1901, MovieDbId = 0 },
-                new Movie() { Id = 0, Title = "Movie3", Year = 1901, MovieDbId = 0 },
+                new Movie() { Id = 0, Title = "Movie1", Year = 1900, TheMovideDbOrgId = 0 },
+                new Movie() { Id = 0, Title = "Movie2", Year = 1901, TheMovideDbOrgId = 0 },
+                new Movie() { Id = 0, Title = "Movie3", Year = 1901, TheMovideDbOrgId = 0 },
             };
 
             listOfMovies.ForEach(movie => repository.Store(movie));

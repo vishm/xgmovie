@@ -22,9 +22,9 @@ namespace XGMoviesBackEnd.Repository
         /// <summary>
         /// Fetch a particular movie record by id.
         /// </summary>
-        /// <param name="movieDbId"></param>
+        /// <param name="id">Move Id</param>
         /// <returns></returns>
-        Movie GetMovie(int movieDbId);
+        Movie GetMovie(int id);
 
         /// <summary>
         /// Store Movie object into persisant store. Enrich with both an 

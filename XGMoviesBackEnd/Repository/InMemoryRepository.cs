@@ -48,7 +48,7 @@ namespace XGMoviesBackEnd.Repository
 
                 var externalMovieId = GetExternalMovieId(_idResolution, movie.Title, movie.Year);
                 movie.Id = ++_movieUniqueCount;
-                movie.MovieDbId = externalMovieId;
+                movie.TheMovideDbOrgId = externalMovieId;
 
                 _movies.Add(movie);
             }

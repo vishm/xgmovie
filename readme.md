@@ -11,7 +11,7 @@ Capture various notes for myself in developing these style of apps, including:
 * Secure storing config data such as API key
 * Improve upon hardcoded absolute path to secrets.(todo)
 * Auto Mapping from user data/public object to domain model
-* Persistant (todo)
+* Persistance, extend model and store in db.
 * Cloud hosting (todo)
 * Web page that renders information stored (todo)
 

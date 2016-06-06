@@ -29,9 +29,10 @@ namespace XGMovies
                                 new InjectionConstructor(apiKey));
 
             // Pair up our movie repository with movie resolution service.
-            var inMemoryRepo = new InMemoryRepository(container.Resolve<IMovieIDResolutionService>(), seed: true);
+            //var inMemoryRepo = new InMemoryRepository(container.Resolve<IMovieIDResolutionService>(), seed: true);
+            var moviesRepo = new DbMovieRepository(container.Resolve<IMovieIDResolutionService>());
 
-            container.RegisterInstance<IMovieRepository>(inMemoryRepo);
+            container.RegisterInstance<IMovieRepository>(moviesRepo);
         }
     }
 }
