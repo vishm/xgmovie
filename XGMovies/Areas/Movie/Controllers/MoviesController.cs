@@ -12,9 +12,7 @@ namespace XGMovies.Controllers
     public class MoviesController : ApiController
     {
         IMovieRepository _repostiory;
-
-      
-
+        
         public MoviesController(IMovieRepository movieRepository)
         {
             _repostiory = movieRepository;
@@ -23,7 +21,7 @@ namespace XGMovies.Controllers
         // GET api/movies
         [HttpGet]
         public IHttpActionResult Get()
-        {
+        {            
             var allMovies = _repostiory.GetAllMovies().AsEnumerable();
             var retData = Mapper.Map<IEnumerable<XGMoviesBackEnd.Domain.Movie>, IEnumerable<Models.Movie>>(allMovies);
             
@@ -68,7 +66,7 @@ namespace XGMovies.Controllers
                 var newMovieObj = Mapper.Map<XGMoviesBackEnd.Domain.Movie, Models.Movie>(domainModel);
 
                 // Use CreatedAtRoute specifying a RouteName "GetById" to form Url, otherwise we
-                // end up with api/movies/Get/1 <- not "Get" is not relevant to path
+                // end up with api/movies/Get/1 <- note "Get" is not relevant to path
                 return CreatedAtRoute<Models.Movie>("GetById", new {  id = newMovieObj.ObjectId}, newMovieObj);
             }
             catch (Exception e)

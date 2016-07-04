@@ -18,7 +18,7 @@ Capture various notes for myself in developing these style of apps, including:
 ##Build
 
 nuget restore
-msbuild /p:Confiration=debug /t:rebuild .\XGMovies.sln
+msbuild /p:Configuration=debug /t:rebuild .\XGMovies.sln
 
 ##Test
 mstest /testcontainer:.\XGMoviesTest\bin\Debug\XGMoviesTest.dll
