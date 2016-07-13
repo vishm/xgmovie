@@ -22,7 +22,6 @@ namespace XGMovies
         private static void RegisterType(UnityContainer container)
         {
             // Initialize our TheMovieDbOrg service for use later
-            var stuff = ConfigurationManager.AppSettings["webpages:Version"];
             var apiKey = ConfigurationManager.AppSettings["TheMovieDbOrgApiKey"];
             container.RegisterType<IMovieIDResolutionService, TheMovieDbOrgService>(
                                 new ContainerControlledLifetimeManager(),

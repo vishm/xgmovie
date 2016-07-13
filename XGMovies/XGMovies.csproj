@@ -209,6 +209,7 @@
     <Content Include="packages.config" />
     <Content Include="Areas\Movie\Views\web.config" />
     <None Include="Project_Readme.html" />
+    <None Include="Properties\PublishProfiles\XGMovies - Web Deploy.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\XGMoviesBackEnd\XGMoviesBackEnd.csproj">

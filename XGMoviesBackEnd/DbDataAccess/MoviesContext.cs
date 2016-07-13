@@ -9,7 +9,7 @@ namespace XGMoviesBackEnd.DbDataAccess
 {
     public class MoviesContext : DbContext
     {
-        public MoviesContext() : this("AzureDb")
+        public MoviesContext() : this("MovieDb")    // Default ConnectionString name
         {
         }
 
